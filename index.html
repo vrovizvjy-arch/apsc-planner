@@ -1,0 +1,324 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>APPSC Group-I Prelims Planner</title>
+<meta name="description" content="87-day APPSC Group-I prelims planner with spaced repetition, mock tracking and analytics.">
+<meta name="theme-color" content="#14634f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<style>
+:root{--bg:#f4f6f3;--fg:#17211c;--cd:#fff;--mu:#66726b;--ac:#14634f;--bd:#dde3dd;--ok:#2e9e5b;--wa:#d9962b;--er:#d64545;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111815;--fg:#e6ece8;--cd:#1a231f;--mu:#93a39a;--ac:#4cc9a4;--bd:#2b3731;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111815;--fg:#e6ece8;--cd:#1a231f;--mu:#93a39a;--ac:#4cc9a4;--bd:#2b3731;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 "Source Sans 3",system-ui,sans-serif;max-width:640px;margin:auto;padding:0 10px 40px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+h1{font:700 20px/1.2 "Fraunces",Georgia,serif;margin:12px 0 2px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);display:flex;gap:4px;padding:6px 0;z-index:9;overflow-x:auto}
+nav button{flex:1;padding:8px 4px;border:1px solid var(--bd);background:var(--cd);color:var(--fg);border-radius:8px;font:inherit;font-weight:600;white-space:nowrap}
+nav button.on{background:var(--ac);color:var(--bg);border-color:var(--ac)}
+.c{background:var(--cd);border:1px solid var(--bd);border-radius:10px;padding:10px 12px;margin:8px 0}
+.r{display:flex;align-items:center;gap:8px}.m{color:var(--mu);font-size:13px}
+.b.on{opacity:.62}.b label{cursor:pointer}.b input[type=checkbox]{width:22px;height:22px;accent-color:var(--ac);flex:none}
+.ch{font-style:normal;font-size:11px;color:#fff;padding:1px 7px;border-radius:9px;margin-right:6px;white-space:nowrap}
+button,select,input{font:inherit;color:var(--fg);background:var(--cd);border:1px solid var(--bd);border-radius:8px;padding:6px 9px}
+button.g{width:100%;margin-top:6px}
+.bar{height:9px;background:var(--bd);border-radius:5px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ac)}
+.k{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.k div{text-align:center;background:var(--bg);border-radius:8px;padding:8px 2px}.k b{font:700 22px Fraunces,Georgia,serif;display:block}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}.cal div{aspect-ratio:1;border-radius:6px;font-size:12px;text-align:center;padding-top:3px;border:1px solid var(--bd);cursor:pointer;background:var(--cd)}
+.cal .h{border:0;aspect-ratio:auto;cursor:default;background:none;color:var(--mu);font-size:11px}.cal small{display:block;font-size:9px;color:var(--mu)}
+.heat{display:flex;flex-wrap:wrap;gap:3px}.heat i{width:20px;height:20px;border-radius:4px}
+.due{padding:4px 0;border-top:1px dashed var(--bd);display:flex;gap:8px;align-items:center;font-size:14px}
+.tip{background:var(--bg);border-left:3px solid var(--wa);padding:6px 10px;border-radius:4px;font-size:14px;margin:6px 0}
+.tip.ok{border-left-color:var(--ok)}.tip.er{border-left-color:var(--er)}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:4px;border-bottom:1px solid var(--bd);text-align:left}
+.f{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}.f input,.f select{flex:1;min-width:70px}
+.g2{display:grid;grid-template-columns:1fr;gap:8px}
+@media(min-width:430px){.g2{grid-template-columns:1fr 1fr}}
+</style></head><body>
+<h1>APPSC Group-I Prelims Planner</h1><div class="m" id="hd"></div>
+<nav id="nv"></nav><div id="app"></div>
+<script>
+const SUB={H:['History','#b4531c'],P:['Polity & IR','#2a5fc4'],E:['Economy','#2f8a4c'],G:['Geography','#0e7490'],Q:['Aptitude','#7b3fb5'],S:['Sci-Tech & Env','#b83a72'],C:['Current affairs','#8a6a12']};
+const A=`H|Indus Valley, Vedic age, Mahajanapadas, Jainism, Buddhism
+H|Magadha, Mauryas, foreign invasions, Kushans, Satavahanas, Sangam, Guptas
+H|Kanauj, Badami and Eastern Chalukyas, Rashtrakutas, Cholas, Kakatiyas, Reddis
+H|Delhi Sultanate, Vijayanagara, Mughals, Bhakti and Sufism
+H|European companies, Bengal, Mysore, Andhra, Nizam, Governors-General
+H|1857 revolt, reform movements, freedom movement, revolutionaries
+H|Gandhi, Patel, Bose, Ambedkar, reorganisation of states
+P|Constitution: evolution, Preamble, FR, FD, DPSP
+P|Amendments, significant provisions, basic structure
+P|Union and states, Parliament, legislatures, federalism
+P|Constitutional authorities, Panchayati Raj, public policy
+P|LPG impact on governance, regulatory bodies, rights issues
+P|India’s foreign policy, institutions, agencies, fora
+E|Indian economy basics, planning, NITI Aayog, HDI, sustainable development
+E|National income, demography, poverty, unemployment, schemes
+E|Agriculture: irrigation, inputs, MSP, credit, land reforms, food security
+E|Industry, Make in India, SEZs, energy, trade, BoP, WTO
+E|RBI, banking, NPAs, markets, SEBI, GST, Finance Commission, budget
+E|Andhra Pradesh economy after 2014 bifurcation
+E|AP Reorganisation Act 2014, special status, Vizag zone, Kadapa steel
+G|Solar system, earth motions, interior, landforms, atmosphere
+G|Climate, air masses, oceans, hazards, climate change
+G|Physical geography: world, India, AP (drainage, soils, vegetation, minerals)
+G|Social geography: population, literacy, tribes, migration, urbanisation
+G|Economic geography: agriculture, industry, transport, trade
+H|Consolidate History + Culture, 40 PYQs
+P|Consolidate Polity + IR, 40 PYQs
+E|Consolidate Economy + AP economy, 40 PYQs
+G|Consolidate Geography, 40 PYQs
+H|Paper I mini-mock (60 Qs, 60 min) + analysis`.split('\n');
+const B=`Q|Number system, order of magnitude, BODMAS
+Q|Powers, squares, roots, HCF and LCM
+Q|Ratio, proportion, variation
+Q|Percentage
+Q|Profit and loss, simple and compound interest
+Q|Mean, median, mode, weighted mean
+Q|Time and work
+Q|Time, speed, distance
+Q|Algebra basics, simplification of symbols
+Q|Area and perimeter of 2D shapes
+Q|Volume and surface area: sphere, cone, cylinder, cuboid
+Q|Lines, angles, triangles, quadrilaterals
+Q|Number series, coding-decoding
+Q|Relations, clocks, calendar, age
+Q|Logical reasoning, analytical ability
+Q|Shapes, sub-sections, Venn diagrams
+Q|Data interpretation I (tables, bar, pie)
+Q|Data interpretation II, data sufficiency
+Q|Probability
+Q|Emotional intelligence, coping with stress
+Q|Social intelligence, decision making, critical thinking
+Q|Timed mixed set: arithmetic (40 Qs)
+Q|Timed mixed set: geometry + algebra (40 Qs)
+Q|Timed mixed set: reasoning (40 Qs)
+Q|Timed mixed set: DI + probability (40 Qs)
+Q|Timed set: weakest two topics so far
+Q|Timed mixed set: all quant (50 Qs)
+Q|Timed mixed set: all reasoning (50 Qs)
+Q|Revise formula sheet + shortcuts
+Q|Paper II mini-mock (60 Qs, 60 min) + analysis`.split('\n');
+const CT=`S|Science and technology: policy, institutions, scientists
+S|ICT, e-governance, cyber security
+S|Space: ISRO, IRNSS, IRS, EDUSAT
+S|Defence: DRDO, defence satellites
+S|Energy: needs, policy, solar, wind, nuclear
+S|Environment: laws, treaties, biodiversity, forests
+S|Climate change, pollution, disaster management
+S|Biotech, nanotech, genetic engineering`.split('\n');
+const TH=['AP and regional affairs','National: schemes, bills, policies','International: summits, treaties, IR','Reports, indices, rankings','Awards, sports, persons, places'];
+const RA=`H|History: ancient, medieval, AP dynasties
+H|History: modern, freedom movement, Gandhi, Ambedkar
+P|Polity: Constitution, FR, DPSP, amendments
+P|Polity: governance, Panchayati Raj, rights, IR
+E|Economy: planning, agriculture, industry, trade
+E|Finance, banking, GST + AP economy and Reorganisation Act
+G|Geography: world, India, AP
+S|Sci-Tech, space, defence, energy, environment`.split('\n');
+const RB=['Q|Arithmetic timed set (percentage, ratio, profit, interest)','Q|Time-work-distance, mensuration, geometry timed set','Q|Reasoning timed set (series, coding, relations, Venn)','Q|DI, sufficiency, probability timed set','Q|EI, social intelligence + mixed set'];
+const HT={A:'Read in 50/10 blocks, then close the book and self-test.',B:'Learn the method, then solve 15 to 20 problems against a timer.',C:'Keep short notes; link facts to Andhra Pradesh.',D:'Recall first, then grade yourself: Again, Hard, Good or Easy.',E:'Log every wrong answer in the Errors tab.',F:'Write what you remember on blank paper, then check gaps.'};
+const CM=[['D','Spaced revision (due list)',40],['E','Timed MCQs (30 to 40) + error log',30],['F','Blank-page recall',10]];
+const pr=s=>{const a=s.split('|');return [a[0],a[1]]};
+function plan(n){
+ if(n<=30){const a=pr(A[n-1]),b=pr(B[n-1]),c=n<=8?pr(CT[n-1]):n==30?['C','Monthly current-affairs compilation + 50-Q quiz']:['C','Current affairs: '+TH[(n-9)%5]+' (last 6 months)'];
+  return{ph:1,bl:[['A',a[1],100,a[0],n<=25],['B',b[1],75,b[0],n<=21],['C',c[1],45,c[0],n<=8],...CM.map(x=>[...x])]}}
+ const k=n-31,mk=n<=81&&k%3==2;
+ if(mk){const pp=Math.floor(k/3)%2?'II':'I';return{ph:2,mock:1,bl:[['A','Full mock, Paper '+pp+' (120 Qs, 120 min, strict timing)',120,'Q'],['B','Mock analysis: tag every wrong question',90,'Q'],['C','Fix the top 3 weak topics from the analysis',60,'S'],['D','Current-affairs quiz',30,'C']]}}
+ const a=pr(RA[k%8]),b=pr(RB[k%5]),fin=n>=82;
+ return{ph:fin?3:2,bl:[['A',(fin?'Final pass: ':'Revision cycle '+(Math.floor(k/8)+2)+': ')+a[1],100,a[0]],['B',b[1],75,b[0]],['C','Current affairs: '+TH[k%5],45,'C'],...CM.map(x=>[...x])]}}
+const TOP=[];for(let n=1;n<=30;n++)plan(n).bl.forEach(b=>{if(b[4])TOP.push({k:n+':'+b[0],n,s:b[3],t:b[1]})});
+const $=s=>document.querySelector(s),N=87,EX=new Date(2027,0,24),dt=n=>new Date(2026,9,28+n);
+const MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],DW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const fd=d=>DW[d.getDay()]+' '+d.getDate()+' '+MN[d.getMonth()];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const t0=()=>{const n=new Date();return Math.floor((new Date(n.getFullYear(),n.getMonth(),n.getDate())-new Date(2026,9,29))/864e5)+1};
+const cd=()=>Math.min(N,Math.max(1,t0()));
+let st={b:{},c:{},r:{},m:[],e:[],f:{},q:{},fm:{},h:{}};
+try{Object.assign(st,JSON.parse(localStorage.getItem('ap1g')||'{}'))}catch(e){}
+st.q=st.q||{};st.fm=st.fm||{};st.h=st.h||{};
+function snap(){const D=cd(),dn=TOP.filter(t=>st.b[t.k]!=null).length;let bm=0;for(const k in st.b){if(st.b[k]==D){const i=k.indexOf(':'),n=+k.slice(0,i),bl=plan(n).bl.find(x=>x[0]==k.slice(i+1));if(bl)bm+=bl[2]}}
+ st.h[D]={r:rdy(),c:Math.round(dn/TOP.length*100),m:(st.fm[D]||0)+bm,d:due(D).length,e:st.e.filter(x=>x.d==D).length}}
+const save=()=>{try{snap();localStorage.setItem('ap1g',JSON.stringify(st))}catch(e){}};
+let tab='d',V=cd();
+const ttl=k=>(TOP.find(t=>t.k==k)||{t:k}).t;
+function pct(n){const p=plan(n);let a=0,d=0;p.bl.forEach(b=>{a+=b[2];if(st.b[n+':'+b[0]]!=null)d+=b[2]});return d/a}
+function mins(){let s=0;for(let n=1;n<=N;n++)plan(n).bl.forEach(b=>{if(st.b[n+':'+b[0]]!=null)s+=b[2]});return s}
+function due(D){const o=[];for(const t of TOP){const c=st.b[t.k];if(c==null)continue;const q=st.q[t.k]||(st.q[t.k]={e:2.5,i:1,due:c+1,n:0});if(q.due<=D)o.push({id:t.k,dd:q.due,k:t.k,x:q.i})}return o.sort((a,b)=>a.dd-b.dd)}
+function gr(k,g){const q=st.q[k];if(g==0){q.i=1;q.e=Math.max(1.3,q.e-.2)}else if(g==1){q.i=Math.max(1,Math.round(q.i*1.2));q.e=Math.max(1.3,q.e-.15)}else if(g==2)q.i=Math.max(q.i+1,Math.round(q.i*q.e));else{q.i=Math.max(q.i+2,Math.round(q.i*q.e*1.3));q.e+=.15}q.n++;q.due=Math.min(cd()+q.i,Math.max(cd()+1,N-2));save();R()}
+function streak(){let n=cd(),s=0;if(pct(n)<.6)n--;while(n>=1&&pct(n)>=.6){s++;n--}return s}
+function tg(k){if(st.b[k]!=null){delete st.b[k];delete st.q[k]}else st.b[k]=cd();save();R()}
+const mmss=s=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');let iv;
+function tick(){clearInterval(iv);iv=setInterval(()=>{const t=st.tm;if(!t){clearInterval(iv);return}const L=Math.round((t.end-Date.now())/1e3);if(L<=0){clearInterval(iv);if(t.study)st.fm[cd()]=(st.fm[cd()]||0)+t.m;st.tm=null;save();try{navigator.vibrate&&navigator.vibrate(300)}catch(e){}R()}else{const e=$('#tc');if(e)e.textContent=mmss(L)}},1000)}
+function ts(m){st.tm={end:Date.now()+m*6e4,m,study:m!=10};save();R();tick()}
+function tx(){const t=st.tm;if(t&&t.study){const el=Math.floor((Date.now()-(t.end-t.m*6e4))/6e4);if(el>0)st.fm[cd()]=(st.fm[cd()]||0)+Math.min(el,t.m)}st.tm=null;save();R()}
+function tm(){const t=st.tm,L=t?Math.max(0,Math.round((t.end-Date.now())/1e3)):0;return `<div class=c><div class=r><b style="flex:1">Focus timer</b><span class=m>Focused today: ${st.fm[cd()]||0} min</span></div>`+(t&&L>0?`<div class=r><b id=tc style="font-size:28px;flex:1">${mmss(L)}</b><span class=m>${t.study?'studying':'break'}</span><button onclick="tx()">Stop</button></div>`:`<div class=f><button onclick="ts(50)">Study 50</button><button onclick="ts(25)">Study 25</button><button onclick="ts(10)">Break 10</button></div>`)+'</div>'}
+function cu(){const L=TOP.filter(t=>t.n<cd()&&st.b[t.k]==null);return L.length?`<div class=c><b>Catch-up queue (${L.length})</b><div class=m>Missed topics. Clear one or two a day inside your A slot.</div>`+L.slice(0,4).map(t=>`<div class=due><input type=checkbox onchange="tg('${t.k}')"><span>${esc(t.t)}</span></div>`).join('')+'</div>':''}
+function rdy(){const dn=TOP.filter(t=>st.b[t.k]!=null).length,cs=Object.values(st.c).filter(Boolean),ac=cs.length?cs.reduce((a,b)=>a+b,0)/cs.length/5:0,mm=st.m.slice(-3),ms=mm.length?Math.max(0,mm.reduce((a,m)=>a+net(m),0)/mm.length)/120:0,mt=dn?Object.values(st.q).filter(q=>q.i>=7).length/dn:0;return Math.round(100*(.3*dn/TOP.length+.25*ac+.25*ms+.2*mt))}
+function wk(){let h='<div class=c><b>Last 7 days</b> <span class=m>planned blocks completed</span><div class=r style="align-items:flex-end;height:74px">';for(let n=Math.max(1,cd()-6);n<=cd();n++){let s=0;plan(n).bl.forEach(b=>{if(st.b[n+':'+b[0]]!=null)s+=b[2]});h+=`<div style="flex:1;text-align:center"><div style="height:${s/300*52}px;background:var(--ac);border-radius:4px 4px 0 0"></div><div class=m style="font-size:10px">${dt(n).getDate()}</div></div>`}return h+'</div></div>'}
+function bk(){return `<div class=c><b>Backup</b><div class=m>Copy this text somewhere safe. Paste it back and tap Restore to recover your progress.</div><textarea id=bt style="width:100%;height:60px;background:var(--cd);color:var(--fg);border:1px solid var(--bd);border-radius:8px">${esc(JSON.stringify(st))}</textarea><div class=f><button onclick="try{navigator.clipboard.writeText($('#bt').value)}catch(e){}">Copy</button><button onclick="rs()">Restore</button></div></div>`}
+function rs(){try{const o=JSON.parse($('#bt').value);if(o&&o.b){st=Object.assign({b:{},c:{},r:{},m:[],e:[],f:{},q:{},fm:{},h:{}},o);save();R()}}catch(e){alert('That backup text could not be read.')}}
+function cf(k,v){v=+v;st.c[k]=v;const q=st.q[k];if(q&&!q.n){q.i=v<=2?1:v==3?2:v==4?3:4;q.due=st.b[k]+q.i}save();R()}
+function mv(d){V=Math.min(N,Math.max(1,V+d));R()}
+function go(n){V=n;tab='t';R()}
+/* ===== analytics helpers ===== */
+const nd=s=>`<div class=m style="padding:10px 2px">${s}</div>`;
+const hval=n=>st.h[n]?st.h[n].m:(st.fm[n]||0);
+function reg(p){const n=p.length;let sx=0,sy=0,sxy=0,sxx=0;p.forEach(q=>{sx+=q[0];sy+=q[1];sxy+=q[0]*q[1];sxx+=q[0]*q[0]});const d=n*sxx-sx*sx||1,m=(n*sxy-sx*sy)/d;return[m,(sy-m*sx)/n]}
+function spark(a){if(a.length<2||!a.some(v=>v>0))return nd('Builds as you log study time.');
+ const mx=Math.max(1,...a),pts=a.map((v,i)=>`${(i*120/(a.length-1)).toFixed(1)},${(28-(v/mx)*22).toFixed(1)}`).join(' ');
+ return `<svg viewBox="0 0 120 30" style="width:100%"><polyline points="${pts}" fill="none" stroke="var(--ac)" stroke-width="2"/></svg>`}
+function tchart(){const ks=Object.keys(st.h).map(Number).filter(n=>n>=1&&n<=cd()).sort((a,b)=>a-b);
+ if(ks.length<2)return nd('Trajectory builds from daily snapshots. Check back tomorrow.');
+ const P=ks.map(n=>[n,st.h[n].r]),X=n=>10+(n-1)/(N-1)*280,Y=r=>95-Math.min(100,Math.max(0,r))*.88;
+ const[m,b]=reg(P),pv=Math.max(0,Math.min(100,m*N+b)),ln=ks[ks.length-1],lv=st.h[ln].r;
+ let s=`<svg viewBox="0 0 300 100" style="width:100%"><g stroke="var(--bd)"><line x1="10" x2="290" y1="${Y(25).toFixed(1)}" y2="${Y(25).toFixed(1)}"/><line x1="10" x2="290" y1="${Y(50).toFixed(1)}" y2="${Y(50).toFixed(1)}"/><line x1="10" x2="290" y1="${Y(75).toFixed(1)}" y2="${Y(75).toFixed(1)}"/></g>`;
+ s+=P.map(([n,r])=>`<circle cx="${X(n).toFixed(1)}" cy="${Y(r).toFixed(1)}" r="2.2" fill="var(--ac)"/>`).join('');
+ s+=`<polyline points="${P.map(([n,r])=>X(n).toFixed(1)+','+Y(r).toFixed(1)).join(' ')}" fill="none" stroke="var(--ac)" stroke-width="2"/>`;
+ s+=`<line x1="${X(ln).toFixed(1)}" y1="${Y(lv).toFixed(1)}" x2="${X(N).toFixed(1)}" y2="${Y(m*N+b).toFixed(1)}" stroke="var(--wa)" stroke-width="1.5" stroke-dasharray="4 3"/>`;
+ s+=`<circle cx="${X(N).toFixed(1)}" cy="${Y(m*N+b).toFixed(1)}" r="3.5" fill="var(--wa)"/></svg>`;
+ return s+`<div class=m>Exam-day projection: <b>${Math.round(pv)}/100</b> · trending ${m>=0?'+':''}${m.toFixed(2)} pts/day. The projection is a rough guide that follows your recent snapshots.</div>`}
+function dchart(){const D=cd(),cnt={};for(const k in st.q){const d=st.q[k].due;cnt[d]=(cnt[d]||0)+1}
+ const a=[];for(let i=0;i<14;i++)a.push(i?cnt[D+i]||0:due(D).length);
+ const mx=Math.max(1,...a),bw=280/14-4;let s=`<svg viewBox="0 0 300 78" style="width:100%">`;
+ s+=a.map((v,i)=>{const h2=v/mx*52,x=10+i*(280/14)+2;return`<rect x="${x.toFixed(1)}" y="${(62-h2).toFixed(1)}" width="${bw.toFixed(1)}" height="${h2.toFixed(1)}" rx="1.5" fill="${i?'var(--ac)':'var(--wa)'}"/>`}).join('');
+ s+=`<text x="10" y="75" font-size="7" fill="var(--mu)">today</text><text x="290" y="75" font-size="7" text-anchor="end" fill="var(--mu)">+13 d (${dt(D+13).getDate()} ${MN[dt(D+13).getMonth()]})</text></svg>`;
+ return s+`<div class=m>Today’s amber bar includes overdue items. Reviews you do today add future dues, so later bars will grow.</div>`}
+function velchart(){const D=cd();if(D<3)return nd('Velocity unlocks from Day 3.');
+ const ns=[];for(let n=Math.max(1,D-13);n<=D;n++)ns.push(n);
+ const ct={};for(const k in st.b){const v=st.b[k];ct[v]=(ct[v]||0)+1}
+ const a=ns.map(n=>ct[n]||0),pl=ns.map(n=>plan(n).bl.length),ap=pl.reduce((x,y)=>x+y,0)/pl.length,mx=Math.max(3,...a,ap+1);
+ let s=`<svg viewBox="0 0 300 78" style="width:100%">`;
+ const X=i=>10+i*(280/(ns.length-1)),bw=Math.max(5,280/ns.length-4);
+ s+=`<line x1="10" x2="290" y1="${(62-ap/mx*52).toFixed(1)}" y2="${(62-ap/mx*52).toFixed(1)}" stroke="var(--wa)" stroke-dasharray="4 3"/>`;
+ s+=a.map((v,i)=>{const h2=v/mx*52;return`<rect x="${(X(i)-bw/2).toFixed(1)}" y="${(62-h2).toFixed(1)}" width="${bw.toFixed(1)}" height="${h2.toFixed(1)}" rx="1.5" fill="var(--ac)"/>`}).join('');
+ s+=`<text x="10" y="75" font-size="7" fill="var(--mu)">${dt(ns[0]).getDate()} ${MN[dt(ns[0]).getMonth()]}</text><text x="290" y="75" font-size="7" text-anchor="end" fill="var(--mu)">today</text></svg>`;
+ const av=a.reduce((x,y)=>x+y,0)/a.length;
+ return s+`<div class=m>Average <b>${av.toFixed(1)}</b> blocks/day vs <b>${ap.toFixed(1)}</b> planned (dashed line). Weeks should sit near the dashed line.</div>`}
+function radar(){const ss=Object.keys(SUB),n=ss.length,cx=150,cy=112,R=84;
+ const cov=[],con=[];ss.forEach(s=>{const T=TOP.filter(t=>t.s==s),d=T.filter(t=>st.b[t.k]!=null);
+  cov.push(T.length?d.length/T.length:0);
+  const cs=d.map(t=>st.c[t.k]).filter(Boolean);con.push(cs.length?cs.reduce((a,b)=>a+b,0)/cs.length/5:0)});
+ const P=(i,v)=>{const A=-Math.PI/2+i*2*Math.PI/n;return[cx+Math.cos(A)*R*v,cy+Math.sin(A)*R*v]};
+ let s=`<svg viewBox="0 0 300 224" style="width:100%">`;
+ [0.25,0.5,0.75,1].forEach(r=>{s+=`<polygon points="${ss.map((_,i)=>P(i,r).map(x=>x.toFixed(1)).join(',')).join(' ')}" fill="none" stroke="var(--bd)"/>`});
+ ss.forEach((x,i)=>{const[gx,gy]=P(i,1);s+=`<line x1="${cx}" y1="${cy}" x2="${gx.toFixed(1)}" y2="${gy.toFixed(1)}" stroke="var(--bd)"/>`});
+ ss.forEach((x,i)=>{const[lx,ly]=P(i,1.17);s+=`<text x="${lx.toFixed(1)}" y="${(ly+3).toFixed(1)}" font-size="8" text-anchor="middle" fill="var(--mu)">${SUB[x][0]}</text>`});
+ s+=`<polygon points="${cov.map((v,i)=>P(i,v).map(x=>x.toFixed(1)).join(',')).join(' ')}" fill="rgba(76,201,164,.25)" stroke="var(--ac)" stroke-width="2"/>`;
+ const hc=con.some(v=>v>0);
+ if(hc)s+=`<polygon points="${con.map((v,i)=>P(i,v).map(x=>x.toFixed(1)).join(',')).join(' ')}" fill="none" stroke="var(--wa)" stroke-width="1.5" stroke-dasharray="4 3"/>`;
+ s+='</svg>';
+ return s+`<div class=m><i class=ch style="background:var(--ac)">coverage</i>${hc?' <i class=ch style="background:var(--wa)">confidence</i>':''} · scale 0 to 1 on each axis</div>`}
+function gridC(){let s='<div class=heat style="gap:2px">';for(let n=1;n<=N;n++){const x=pct(n);
+ const bg=x>=.999?'var(--ok)':x>=.7?'rgba(46,158,91,.5)':x>=.4?'var(--wa)':x>0?'rgba(217,150,43,.4)':'var(--bd)';
+ s+=`<i title="Day ${n} · ${Math.round(x*100)}%" style="width:18px;height:18px;background:${bg}"></i>`}return s+'</div>'}
+function wkMins(){const D=cd();let s=0;for(const k in st.b){const v=st.b[k];if(v>D-7&&v<=D){const i=k.indexOf(':'),n=+k.slice(0,i),bl=plan(n).bl.find(x=>x[0]==k.slice(i+1));if(bl)s+=bl[2]}}for(let n=Math.max(1,D-6);n<=D;n++)s+=st.fm[n]||0;return s}
+function alerts(){const D=cd(),o=[];
+ const dn=TOP.filter(t=>st.b[t.k]!=null).length,behind=TOP.filter(t=>t.n<=Math.min(D,30)).length-dn,dues=due(D).length;
+ if(t0()<1)o.push(['wa','Plan starts 29 Oct. Set up notes and sources today.']);
+ if(dues>=8)o.push(['er',dues+' revisions are due, some overdue. Clear the pile in the D slot first.']);
+ else if(dues>0)o.push(['wa',dues+' revision'+(dues>1?'s':'')+' due today.']);
+ if(behind>3)o.push(['er','You are '+behind+' topics behind plan. Add a 30-min catch-up block today.']);
+ else if(behind>0)o.push(['wa',behind+' topic'+(behind>1?'s':'')+' behind plan. Clear '+(behind>1?'them':'it')+' in this week’s D slot.']);
+ for(const s in SUB){const T=TOP.filter(t=>t.s==s),cs=T.filter(t=>st.c[t.k]).map(t=>st.c[t.k]);
+  if(cs.length>=3){const av=cs.reduce((a,b)=>a+b,0)/cs.length;
+   if(av<=2)o.push(['wa',SUB[s][0]+' confidence is low ('+av.toFixed(1)+'/5). Schedule a re-learn plus a timed set.'])}}
+ if(D>=33&&!st.m.length)o.push(['wa','No mock logged yet. First full mock is scheduled on Day 33.']);
+ if(st.m.length){const L=st.m[st.m.length-1],ago=D-L.d,att=L.c+L.w;
+  if(ago>4&&D>=33)o.push(['er','Last mock was '+ago+' days ago. Keep the every-third-day rhythm.']);
+  if(att&&L.c/att<.7)o.push(['er','Last mock accuracy '+Math.round(L.c/att*100)+'%. Eliminate two options before attempting.'])}
+ if(!o.length)o.push(['ok','All green: on plan, reviews under control, mocks on rhythm.']);
+ return o.map(a=>'<div class="tip'+(a[0]=='ok'?' ok':a[0]=='er'?' er':'')+'">'+a[1]+'</div>').join('')}
+/* ===== tabs ===== */
+function vT(){const p=plan(V);let h=`<div class=c><div class=r><button onclick="mv(-1)">‹</button><div style="flex:1;text-align:center"><b>Day ${V} of ${N} · ${fd(dt(V))}</b><div class=m>${['','Phase 1: learn new topics + revise','Phase 2: '+(p.mock?'mock test day':'revise + test'),'Final week: no new topics'][p.ph]}</div></div><button onclick="mv(1)">›</button></div><button class=g onclick="V=cd();R()">Jump to today</button></div>`+tm()+cu();
+ p.bl.forEach(b=>{const k=V+':'+b[0],on=st.b[k]!=null,s=SUB[b[3]];
+  h+=`<div class="c b ${on?'on':''}"><label class=r><input type=checkbox ${on?'checked':''} onchange="tg('${k}')"><span style="flex:1">${s?`<i class=ch style="background:${s[1]}">${s[0]}</i>`:''}${esc(b[1])}${p.mock?'':`<div class=m>${HT[b[0]]}</div>`}</span><span class=m>${b[2]}m</span></label>`;
+  if(b[4]&&on)h+=`<div class=m style="margin-top:6px">Confidence: <select onchange="cf('${k}',this.value)">${['Rate','1 shaky','2','3 ok','4','5 solid'].map((o,i)=>`<option value="${i}" ${(st.c[k]||0)==i?'selected':''}>${o}</option>`).join('')}</select></div>`;
+  if(b[0]=='D'&&!p.mock){const L=due(V),sh=L.slice(0,8);h+=sh.length?sh.map(d=>`<div class=due style="flex-wrap:wrap"><span style="flex:1 1 100%">${esc(ttl(d.k))}<span class=m> · interval ${d.x}d${d.dd<V?', overdue':''}</span></span>${['Again','Hard','Good','Easy'].map((g,i)=>`<button onclick="gr('${d.id}',${i})">${g}</button>`).join('')}</div>`).join('')+(L.length>8?`<div class=m>+${L.length-8} more queued</div>`:''):'<div class=m style="margin-top:4px">Nothing due. Use this time on weak topics from the heat map.</div>'}
+  h+='</div>'});
+ if(dt(V).getDay()==0)h+='<div class=tip>Sunday review (20 min): open Progress, compare plan vs actual, and fix next week’s weakest topic first.</div>';
+ if(V==N)h+='<div class=tip>Last day: light scan of formula and fact sheets, early sleep. Exam is tomorrow, 24 Jan.</div>';
+ h+=`<div class=c><span class=m>Focus today (1 to 5)</span> <select onchange="st.f[${V}]=+this.value;save()">${[0,1,2,3,4,5].map(i=>`<option ${(st.f[V]||0)==i?'selected':''}>${i}</option>`).join('')}</select></div>`;return h}
+function vP(){let h='<div class=c><b>Calendar</b> <span class=m>tap a day. Green = 70%+ done, amber = started, M = mock</span><div class=cal>'+DW.map(d=>`<div class=h>${d[0]}</div>`).join('')+'<div class=h></div>'.repeat(4);
+ for(let n=1;n<=N;n++){const x=pct(n),p=plan(n),bg=x>=.7?'var(--ok)':x>0?'var(--wa)':'';h+=`<div onclick="go(${n})" style="${bg?'background:'+bg+';color:#fff;':''}${n==cd()?'outline:2px solid var(--fg);':''}">${dt(n).getDate()}<small style="${bg?'color:#fff':''}">${p.mock?'M':n<=30?'L':n>81?'F':'R'}</small></div>`}
+ h+='</div></div><div class=c><b>Phases</b><div class=m>L = Phase 1, 29 Oct to 27 Nov: one new topic in each of 3 slots daily + adaptive spaced revision (intervals grow or shrink with your grade).<br>R = Phase 2, 28 Nov to 17 Jan: revision cycles by subject, timed sets, a full mock every third day.<br>M = full mock + 90-min analysis. F = 18 to 23 Jan: final pass, no new topics. Exam: 24 Jan.</div></div>';return h}
+function vG(){const D=cd(),dn=TOP.filter(t=>st.b[t.k]!=null).length,ex=TOP.filter(t=>t.n<=Math.min(D,30)).length,left=Math.ceil((EX-new Date())/864e5),hrs=(mins()/60).toFixed(1);
+ const Q=Object.values(st.q),rd=Q.reduce((s,q)=>s+q.n,0),all=Q.filter(q=>q.i>=7).length,dueN=due(D).length,bh=ex-dn;
+ let h=`<div class=c><div class=k><div><b>${left}</b>days left</div><div><b>${streak()}</b>day streak</div><div><b>${hrs}</b>hours logged</div></div></div>
+ <div class=c><b>Syllabus coverage ${Math.round(dn/TOP.length*100)}%</b> <span class=m>${dn} of ${TOP.length} topics</span><div class=bar><i style="width:${dn/TOP.length*100}%"></i></div>
+ <div class=tip>${t0()<1?'Starts 29 Oct. Prepare notes and sources today.':bh>3?`You are ${bh} topics behind plan. Stretch the first topic block by 30 min on weekends and skip C-slot extras until caught up.`:bh>0?`${bh} topics behind. Catch up in this week’s D slot.`:'On or ahead of plan.'}</div></div>
+ <div class=c><div class=r><div style="font:700 40px Fraunces,Georgia,serif;color:var(--ac)">${rdy()}</div><div class=m style="flex:1">Readiness out of 100: coverage 30%, confidence 25%, last 3 mocks 25%, memory strength 20%.</div></div></div>`;
+ h+=`<div class=c><b>Readiness trajectory</b> <span class=m>solid = actual · dashed = projection</span>${tchart()}</div>`;
+ h+=`<div class=c><b>Memory strength</b><div class=m>${rd} reviews done · ${all} of ${dn} topics at 7+ day intervals · ${dueN} due now</div><div class=bar><i style="width:${dn?all/dn*100:0}%"></i></div></div>
+ <div class=c><b>Review workload · next 14 days</b>${dchart()}</div>${wk()}
+ <div class=c><b>Velocity · blocks done per day</b>${velchart()}</div><div class=c><b>By subject</b>`;
+ for(const s in SUB){const T=TOP.filter(t=>t.s==s);if(!T.length)continue;const d=T.filter(t=>st.b[t.k]!=null),cs=d.map(t=>st.c[t.k]).filter(Boolean),av=cs.length?(cs.reduce((a,b)=>a+b,0)/cs.length).toFixed(1):'–';
+  h+=`<div style="margin:6px 0"><div class=r><i class=ch style="background:${SUB[s][1]}">${SUB[s][0]}</i><span class=m style="flex:1">${d.length}/${T.length} done · confidence ${av}</span></div><div class=bar><i style="width:${d.length/T.length*100}%;background:${SUB[s][1]}"></i></div></div>`}
+ h+=`</div><div class=c><b>Subject radar</b>${radar()}</div>`;
+ h+='<div class=c><b>Confidence heat map</b> <span class=m>grey not done, red weak, amber ok, green strong</span><div class=heat>'+TOP.map(t=>{const c=st.c[t.k],d=st.b[t.k]!=null;return`<i title="${esc(t.t)}" style="background:${!d?'var(--bd)':!c?'#6b8fd6':c<=2?'var(--er)':c==3?'var(--wa)':'var(--ok)'}"></i>`}).join('')+'</div>';
+ const weak=TOP.filter(t=>st.c[t.k]&&st.c[t.k]<=2);if(weak.length)h+=`<div class=tip>Weak topics to re-learn: ${weak.slice(0,4).map(t=>esc(t.t.split(',')[0])).join('; ')}</div>`;
+ h+='</div><div class=c><b>Consistency grid</b> <span class=m>all 87 days · colour = share of that day’s blocks done</span>'+gridC()+'</div><div class=c><b>Method behind the plan</b><div class=m>Adaptive spaced repetition (as in Anki: Again, Hard, Good, Easy shrink or stretch each topic’s interval) fights forgetting. Active recall and timed MCQs beat re-reading. Mixing subjects in one day (interleaving) improves retention. Mocks every third day train speed and negative-mark control. Confidence ratings and the error log show where to spend time.</div></div>'+bk();return h}
+const net=m=>m.c-m.w/3;
+function addM(){const c=+$('#mc').value,w=+$('#mw').value;if(!(c>=0&&w>=0&&c+w<=120&&$('#mc').value!==''))return;st.m.push({d:cd(),p:$('#mp').value,c,w});save();R()}
+function sct(){if(st.m.length<2)return nd('Log two or more mocks to unlock this map.');
+ let s=`<svg viewBox="0 0 300 110" style="width:100%"><g stroke="var(--bd)"><line x1="10" x2="290" y1="95" y2="95"/><line x1="10" x2="290" y1="50" y2="50"/><line x1="150" x2="150" y1="5" y2="95"/><line x1="243" x2="243" y1="5" y2="95"/></g>`;
+ s+=`<line x1="10" x2="290" y1="32" y2="32" stroke="var(--er)" stroke-dasharray="4 3"/>`;
+ s+=`<text x="12" y="10" font-size="7" fill="var(--mu)">accuracy</text><text x="288" y="106" font-size="7" text-anchor="end" fill="var(--mu)">attempts (of 120)</text>`;
+ s+=st.m.map(m=>{const att=m.c+m.w,ac=att?m.c/att:0;return`<circle cx="${(10+att/120*280).toFixed(1)}" cy="${(95-ac*90).toFixed(1)}" r="4" fill="${m.p=='Paper I'?'var(--ac)':'#b4531c'}"><title>Day ${m.d} · ${m.c} right, ${m.w} wrong</title></circle>`}).join('');
+ s+='</svg>';
+ const L=st.m[st.m.length-1],att=L.c+L.w,ac=att?L.c/att:0;
+ const tips=[];if(att<100)tips.push('Raise attempts: do a faster first pass and mark skips for review.');if(ac<.8&&att>=100)tips.push('Hold accuracy: guess only after eliminating two options.');if(!tips.length)tips.push('In the ideal zone — high attempts with high accuracy.');
+ return s+`<div class=tip>${tips.join(' ')} Dashed line = 70% accuracy.</div>`}
+function mproj(){if(st.m.length<2)return nd('Projection unlocks after two mocks.');
+ const P=st.m.map((m,i)=>[i,net(m)]),[a,b]=reg(P),py=Math.max(0,Math.min(120,a*st.m.length+b));
+ const tot=st.m.reduce((s,m)=>s+m.w/3,0);
+ return `<div class=r><div style="font:700 34px Fraunces,Georgia,serif;color:var(--ac)">${py.toFixed(0)}</div><div class=m style="flex:1">projected net on your next mock (trend ${a>=0?'+':''}${a.toFixed(1)} per mock).<br>Negatives so far: ${tot.toFixed(0)} marks lost — ${(tot/st.m.length).toFixed(1)} per mock.</div></div>`}
+function vM(){let h=`<div class=c><b>Log a mock</b><div class=f><select id=mp><option>Paper I</option><option>Paper II</option></select><input id=mc type=number inputmode=numeric placeholder="Correct"><input id=mw type=number inputmode=numeric placeholder="Wrong"></div><button class=g onclick="addM()">Save mock</button><div class=m>Net score = correct minus one-third per wrong answer (check the current notification for the negative marking rule).</div></div>`;
+ if(st.m.length){const v=st.m.map(net),mx=120,X=i=>10+i*(280/Math.max(1,v.length-1)),Y=x=>95-Math.max(0,x)/mx*90;
+  const ma=v.map((_,i)=>v.slice(Math.max(0,i-2),i+1).reduce((a,b)=>a+b,0)/Math.min(3,i+1));
+  h+=`<div class=c><b>Net score trend</b><svg viewBox="0 0 300 100" style="width:100%"><g stroke="var(--bd)"><line x1=0 x2=300 y1=5 y2=5 /><line x1=0 x2=300 y1=50 y2=50 /><line x1=0 x2=300 y1=95 y2=95 /></g>`;
+  if(v.length>=3)h+=`<polyline points="${ma.map((y,i)=>X(i).toFixed(1)+','+Y(y).toFixed(1)).join(' ')}" fill="none" stroke="var(--wa)" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+  h+=`<polyline points="${v.map((y,i)=>X(i).toFixed(1)+','+Y(y).toFixed(1)).join(' ')}" fill=none stroke="var(--ac)" stroke-width=2 />`;
+  h+=v.map((y,i)=>`<circle cx="${X(i).toFixed(1)}" cy="${Y(y).toFixed(1)}" r="3.5" fill="${st.m[i].p=='Paper I'?'var(--ac)':'#b4531c'}" />`).join('');
+  h+='</svg><div class=m><i class=ch style="background:var(--ac)">Paper I</i> <i class=ch style="background:#b4531c">Paper II</i> · dashed = 3-mock average</div>';
+  const l=st.m[st.m.length-1],att=l.c+l.w,acc=att?l.c/att:0;h+=`<div class=tip>Last mock: ${net(l).toFixed(1)} net. Attempted ${att}, accuracy ${Math.round(acc*100)}%, ${(l.w/3).toFixed(1)} marks lost to negatives. ${acc<.7?'Accuracy is under 70%: attempt only when you can eliminate two options.':att<100?'Accuracy is solid. Raise attempts with faster first pass.':'Strong attempt rate; protect accuracy.'}</div><table><tr><th>Day</th><th>Paper</th><th>C</th><th>W</th><th>Net</th></tr>${st.m.slice().reverse().map(m=>`<tr><td>${m.d}</td><td>${m.p}</td><td>${m.c}</td><td>${m.w}</td><td>${net(m).toFixed(1)}</td></tr>`).join('')}</table></div>`;
+  h+=`<div class=c><b>Accuracy vs attempts</b>${sct()}</div><div class=c><b>Projection</b>${mproj()}</div>`}
+ return h}
+const CZ={'Concept gap':'Re-learn the topic, then do 10 fresh questions.','Silly mistake':'Slow down on the last read; underline the ask.','Time pressure':'Practise sectional sets with a stricter timer.','Blind guess':'Stop guessing without eliminating two options.','Forgot (recall)':'Add the fact to the +1/+3/+7 revision queue.'};
+function addE(){const t=$('#et').value.trim();if(!t)return;st.e.push({d:cd(),s:$('#es').value,c:$('#ec').value,t});save();R()}
+function delE(i){st.e.splice(i,1);save();R()}
+function ech(){if(st.e.length<2)return nd('Weekly error analytics unlock after a few entries.');
+ const CS=Object.keys(CZ),CO=['#2a5fc4','#b4531c','#7b3fb5','#0e7490','#8a6a12'];
+ const wk={};st.e.forEach(e=>{const w=Math.ceil(e.d/7);(wk[w]=wk[w]||{})[e.c]=(wk[w][e.c]||0)+1});
+ const ws=Object.keys(wk).map(Number).sort((a,b)=>a-b).slice(-8);
+ const tot=ws.map(w=>CS.reduce((s,c)=>s+(wk[w][c]||0),0)),mx=Math.max(1,...tot);
+ let s=`<svg viewBox="0 0 300 92" style="width:100%">`;
+ ws.forEach((w,i)=>{const X=10+i*(280/ws.length),bw=280/ws.length-4;let y=78;
+  CS.forEach((c,j)=>{const n=wk[w][c]||0;if(!n)return;const h2=n/mx*64;s+=`<rect x="${X.toFixed(1)}" y="${(y-h2).toFixed(1)}" width="${bw.toFixed(1)}" height="${h2.toFixed(1)}" fill="${CO[j]}"/>`;y-=h2});
+  s+=`<text x="${(X+bw/2).toFixed(1)}" y="90" font-size="7" text-anchor="middle" fill="var(--mu)">W${w}</text>`});
+ s+='</svg>';
+ return s+`<div class=m style="margin-top:4px">${CS.map((c,i)=>`<i class=ch style="background:${CO[i]}">${c}</i>`).join(' ')}</div>`}
+function rep(){const rp={};st.e.forEach(e=>{const k=e.t.trim().toLowerCase();if(k)rp[k]=(rp[k]||0)+1});
+ const t2=Object.entries(rp).filter(x=>x[1]>=2).sort((a,b)=>b[1]-a[1]);
+ return t2.length?t2.slice(0,6).map(([k,v])=>`<div class=due><span style="flex:1">${esc(k)} <span class=m>· ×${v}</span></span></div>`).join('')+'<div class=tip>Repeat offenders: re-learn these, then solve 10 fresh questions on each.</div>':nd('No repeat errors yet — good sign.')}
+function vE(){let h=`<div class=c><b>Log an error</b><div class=f><select id=es>${Object.keys(SUB).map(s=>`<option value=${s}>${SUB[s][0]}</option>`).join('')}</select><select id=ec>${Object.keys(CZ).map(s=>`<option>${s}</option>`).join('')}</select></div><div class=f><input id=et placeholder="Topic or what went wrong"></div><button class=g onclick="addE()">Add error</button></div>`;
+ if(st.e.length){const cc={},ss={};st.e.forEach(e=>{cc[e.c]=(cc[e.c]||0)+1;ss[e.s]=(ss[e.s]||0)+1});const top=Object.entries(cc).sort((a,b)=>b[1]-a[1])[0];
+  h+=`<div class=c><b>Why you lose marks</b>${Object.entries(cc).map(([k,v])=>`<div class=m>${k} · ${v}</div><div class=bar><i style="width:${v/st.e.length*100}%"></i></div>`).join('')}<div class=tip>Biggest cause: ${top[0]}. ${CZ[top[0]]}</div></div><div class=c><b>Where</b> ${Object.entries(ss).map(([k,v])=>`<i class=ch style="background:${SUB[k][1]}">${SUB[k][0]} ${v}</i>`).join(' ')}</div><div class=c><b>Repeat offenders</b>${rep()}</div><div class=c><b>Errors per week</b> <span class=m>stacked by cause</span>${ech()}</div><div class=c>${st.e.slice().reverse().slice(0,12).map((e,i)=>`<div class=due><span style="flex:1">${esc(e.t)}<span class=m> · ${SUB[e.s][0]}, ${e.c}</span></span><button onclick="delE(${st.e.length-1-i})">×</button></div>`).join('')}</div>`}
+ return h}
+function vD(){const D=cd(),p=plan(D),dn=TOP.filter(t=>st.b[t.k]!=null).length,behind=TOP.filter(t=>t.n<=Math.min(D,30)).length-dn,dues=due(D).length,left=Math.ceil((EX-new Date())/864e5),wk=wkMins();
+ const ph=['','Phase 1 · learning','Phase 2 · revise + mock','Final week'][p.ph]+(p.mock?' · MOCK DAY':'');
+ const nx=p.bl.find(b=>st.b[D+':'+b[0]]==null);
+ let h=`<div class=c><div class=r><b style="flex:1">Day ${D} of ${N} · ${fd(dt(D))}</b><span class=m>${ph}</span></div><div class=bar style="margin-top:8px"><i style="width:${Math.round(pct(D)*100)}%"></i></div><div class=m>Today ${Math.round(pct(D)*100)}% complete · exam in ${left} days</div></div>`;
+ h+=`<div class=c><div class=k><div><b>${left}</b>days left</div><div><b>${rdy()}</b>readiness</div><div><b>${streak()}</b>day streak</div><div><b>${dues}</b>due now</div><div><b>${(wk/60).toFixed(1)}h</b>this week</div><div><b>${Math.max(0,behind)}</b>behind</div></div></div>`;
+ h+=`<div class=c><b>Needs attention</b>${alerts()}</div>`;
+ if(nx){const s=SUB[nx[3]];h+=`<div class=c><b>Next up today</b><div class=r style="margin-top:6px">${s?`<i class=ch style="background:${s[1]}">${s[0]}</i>`:''}<span style="flex:1">${esc(nx[1])}</span><span class=m>${nx[2]}m</span></div><button class=g onclick="tab='t';V=cd();R()">Open Today</button></div>`}
+ const m14=[],c14=[];for(let n=Math.max(1,D-13);n<=D;n++){m14.push(hval(n));c14.push(Math.round(pct(n)*100))}
+ h+=`<div class=g2><div class=c><b>Focus · 14 days</b> <span class=m>last ${m14[m14.length-1]} min</span>${spark(m14)}</div><div class=c><b>Completion · 14 days</b> <span class=m>last ${c14[c14.length-1]}%</span>${spark(c14)}</div></div>`;
+ h+=`<div class=c><b>Quick actions</b><div class=g2 style="margin-top:6px"><button onclick="ts(50);tab='t';R()">Start 50-min focus</button><button onclick="tab='t';V=cd();R()">Open Today’s plan</button><button onclick="tab='m';R()">Log a mock</button><button onclick="tab='g';R()">Full analytics</button></div></div>`;
+ return h}
+function R(){const T=[['d','Home'],['t','Today'],['p','Plan'],['g','Progress'],['m','Mocks'],['e','Errors']];
+ $('#nv').innerHTML=T.map(x=>`<button class="${tab==x[0]?'on':''}" onclick="tab='${x[0]}';R()">${x[1]}</button>`).join('');
+ $('#hd').textContent='Exam 24 Jan 2027 · 5 hours a day · progress saves in this browser';
+ $('#app').innerHTML={d:vD,t:vT,p:vP,g:vG,m:vM,e:vE}[tab]()}
+save();R();if(st.tm)tick();document.addEventListener('visibilitychange',()=>{if(!document.hidden){save();R()}});
+if('serviceWorker' in navigator&&location.protocol=='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script></body></html>
